@@ -1,0 +1,59 @@
+<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center space-around">
+	<!-- <mcg-select [items]="certificateTypes" title="Loại bằng cấp" [(value)]="entity.CertificateType"  fxFlex [required]="true" (valueChange)="changed()"></mcg-select>-->
+	<div class="form-experience" fxFlex>
+		<p>Loại bằng cấp</p>
+		<kendo-combobox [data]="" [(value)]="entity.CertificateType" formControlName="degreeType" #degreeType [allowCustom]=""
+			style="width: 100%;" (valueChange)="changed()" required>
+		</kendo-combobox>
+	</div>
+	<!-- <mcg-select [items]="majors" title="{{ 'NAV.SPECIALIZED' | translate }}" [value]="entity.Major"  fxFlex></mcg-select>
+  <div fxLayout="row" fxFlex="33"> -->
+	<div class="form-experience" fxFlex="33">
+		<p>Chuyên nghành</p>
+		<kendo-combobox [data]="" [(value)]="entity.Major" formControlName="specialized" #specialized [allowCustom]=""
+			style="width: 100%;">
+		</kendo-combobox>
+	</div>
+	<!--    <mcg-select [items]="classifications" title="{{ 'NAV.CLASSIFICATION' | translate }}" [(value)]="entity.Classification"  fxFlex="85"></mcg-select> -->
+	<div class="form-experience" fxFlex="85">
+		<p>Xếp loại</p>
+		<kendo-combobox [data]="" [(value)]="entity.Classification" formControlName="graded" #graded [allowCustom]=""
+			style="width: 100%;">
+		</kendo-combobox>
+	</div>
+	<div fxFlex class="remove">
+		<button mat-raised-button color="red" class="remove-button" (click)="delete($event)">Xóa</button>
+	</div>
+</div>
+<!-- </div> -->
+
+<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center space-around">
+	<!-- <mat-form-field fxFlex>
+    <input type="text" name="TrainingCenter" matInput placeholder="{{ 'NAV.SCHOOL-CENTER' | translate }}" [(ngModel)]="entity.TrainingCenter" />
+  </mat-form-field> -->
+  <kendo-formfield fxFlex>
+	<kendo-label [for]="address" text="Địa chỉ"></kendo-label>
+	<input formControlName="address" kendoTextBox #address
+		style="width: 100%;" />
+</kendo-formfield>
+  <!-- <mat-form-field fxFlex>
+    <input matInput type="month" placeholder="{{ 'NAV.START' | translate }}" fxFlex [(ngModel)]="entity.From" (ngModelChange)="fromChange($event)">
+  </mat-form-field> -->
+  <!-- <mat-form-field fxFlex>
+    <input matInput type="month" placeholder="{{ 'NAV.END' | translate }}" fxFlex [(ngModel)]="entity.To" (ngModelChange)="toChange($event)">
+  </mat-form-field> -->
+  <div fxFlex="50" style="padding-left: 30px; width: 100%;">
+	<kendo-daterange>
+		<label fxFlex="25" class="start">
+			<p>Bắt đầu</p>
+			<kendo-dateinput kendoDateRangeStartInput [(value)]="range.start">
+			</kendo-dateinput>
+		</label>
+		<label fxFlex="25" class="end">
+			<p>Kết thúc</p>
+			<kendo-dateinput kendoDateRangeEndInput [(value)]="range.end">
+			</kendo-dateinput>
+		</label>
+	</kendo-daterange>
+</div>
+</div>

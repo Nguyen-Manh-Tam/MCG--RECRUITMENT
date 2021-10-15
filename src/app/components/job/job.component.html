@@ -1,0 +1,55 @@
+<!-- HEADER -->
+<div class="header mat-accent-bg p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
+
+    <div class="hero-text" style="max-height: 60px;">
+        <div class="card-header-wrapper">
+            <h3> Danh mục công việc dành cho ứng viên</h3>
+        </div>
+    </div>
+
+</div>
+<!-- / HEADER -->
+
+<!-- CONTENT -->
+<div class="job-page">
+    <div class="content p-24">
+        <div class="job-content">
+            <div class="job-row" fxLayout="row" fxLayoutAlign="start center" *ngFor="let job of _job"
+                (click)="jobSelected(job.Code)">
+                <div class="info" fxFlex FlexLayout="column">
+                    <div class="row-1" fxLayout="row" fxLayoutAlign="start center">
+                        <div class="name" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+                            <div fxLayout="row" fxFlex="10" class="avatar-img">
+                                <img class="company-avatar" src="{{url}}{{job.Company.FeaturedImageUrl}}"
+                                    *ngIf="job.Company.FeaturedImageUrl" />
+                                <img class="company-avatar" src="{{default_logo}}"
+                                    *ngIf="!job.Company?.FeaturedImageUrl" />
+                            </div>
+                            <div class="company-infor">
+                                <div>
+                                    <h2 class="bold">{{job.Company.Name}}</h2>
+                                    <h2 class="bold">{{job.JobPosition.Name}}</h2>
+                                </div>
+                                <div class="text-text" fxLayoutAlign="start start">
+                                    <div class="text-ellipsis">
+                                        <!-- {{job.AdvertisementTemplate | htmlToPlaintext }} -->
+                                        <span [innerHtml]="job.AdvertisementTemplate" class="text-concat"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center" class="time">
+                            <div>{{job.FromNeedDate | date: 'dd/MM/yyyy'}} - {{job.ToNeedDate | date: 'dd/MM/yyyy'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="datapager">
+    <kendo-datapager [style.width.%]="100" [pageSize]="pageSize" [skip]="skip" [total]="total"
+        (pageChange)="onPageChange($event)">
+    </kendo-datapager>
+</div>

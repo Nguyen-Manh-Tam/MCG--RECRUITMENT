@@ -1,0 +1,13 @@
+<div fxLayout="column" class="w-100-p">
+  <div fxLayout="column" *ngFor="let entity of entities">
+    <mcg-certificate [entity]="entity" [certificateTypes]="certificateTypes" [majors]="majors" [classifications]="classifications"
+    (remove)="remove(entity)" (entityChange)="onCertificateCallBack(entity)">
+  </mcg-certificate>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start">
+  <span class="flex-space"></span>
+  <button mat-raised-button color="primary" class="save-button" (click)="add()">Thêm mới</button>
+</div>
+

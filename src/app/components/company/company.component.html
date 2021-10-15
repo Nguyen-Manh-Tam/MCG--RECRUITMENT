@@ -1,0 +1,40 @@
+<div class="card-container">
+	<div class="card-header-wrapper">
+		<h3> {{ customMsgService.translate('WelcomeToMcgIt') }} </h3>
+	</div>
+	<div class="destination-wrapper">
+		<div class="destination" *ngFor="let company of _companies" fxLayout="column">
+			<div class="header-destination" (click)="jobDetail(company.Company.Code)">
+				<div class="avatar-container">
+					<img class="avatar" src="{{url}}{{company.Company?.FeaturedImageUrl}}"
+						*ngIf="company.Company?.FeaturedImageUrl !== undefined">
+					<img class="avatar" src="{{default_logo}}" *ngIf="company.Company?.FeaturedImageUrl == undefined">
+				</div>
+				<div class="category">
+					{{company.Company.Name}}
+				</div>
+				<div class="total">{{ company.TotalRecruitment }}</div>
+			</div>
+			<div class="company-industry">
+				<span class="k-icon k-i-set-column-position"></span>
+			</div>
+			<div class="company-info" fxLayout="row" fxFlex>
+				<span class="k-icon k-i-marker-pin"></span>
+				<p class="padding-10"> {{ company.Company?.Address?.Name }}</p>
+			</div>
+			<div class="company-phone" fxLayout="row" fxFlex>
+				<span class="k-icon k-i-flip-vertical"></span>
+				<p class="padding-10"> {{ company.Company?.Phone?.Value }} </p>
+			</div>
+			<div class="company-website" fxLayout="row" fxFlex>
+				<span class="k-icon k-i-globe"></span>
+				<a class="padding-10" (click)="openwebsite(company.Company.Website)"> {{ company.Company?.Website }}</a>
+			</div>
+		</div>
+	</div>
+	<div class="datapager">
+		<kendo-datapager [style.width.%]="100" [pageSize]="pageSize" [skip]="skip" [total]="total"
+			(pageChange)="onPageChange($event)">
+		</kendo-datapager>
+	</div>
+</div>

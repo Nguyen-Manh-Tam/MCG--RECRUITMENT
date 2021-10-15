@@ -1,0 +1,100 @@
+<div id="job-detail" class="page-layout-simple">
+
+  <!-- HEADER -->
+  <div class="header" fxLayout="column" fxLayoutAlign="center center">
+
+    <div class="hero-text" style="max-height: 60px;">
+      <h1 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+        Thông tin công việc
+      </h1>
+    </div>
+
+  </div>
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content p-24">
+    <div class="contents" fxLayout="column" fxLayoutAlign="center">
+      <div class="filters" fxLayout="column" fxLayout.gt-xs="row">
+        <div fxFlex="75" class="job" fxLayout="column">
+          <div fxLayout="column" class="job-box">
+            <div class="apply-col" fxLayout="row">
+              <div fxFlex="70" class="job-title">
+                <span id="job-info" fxFlex>
+                  {{data.JobPosition.Name}}
+                </span>
+              </div>
+              <div fxFlex="15" class="button-apply">
+                <button kendoButton (click)="apply(data.Code)">
+                  Ứng tuyển
+                </button>
+              </div>
+
+
+
+              <div fxFlex="15" class="button-upload">
+                <!-- <button kendoButton (click)="uploadCv()">Nộp CV</button> -->
+                <button kendoButton class="button-cv" (click)="open()">Nộp CV</button>
+                <kendo-dialog *ngIf="opened" autoFocusedElement="#username" title="Nộp CV" (close)="close('cancel')"
+                  [minWidth]="500" [width]="800">
+                  <div>
+                    <!-- <p style="text-align: left;">Nhập họ tên</p>
+
+                    <input class="k-textbox" id="username" placeholder="Họ và tên" style="width: 100%"/> -->
+                      <app-apply-dialog></app-apply-dialog>
+                  </div>
+                  <kendo-dialog-actions>
+                    <button kendoButton (click)="close('no')">Đóng</button>
+                    <button kendoButton (click)="close('yes')" primary="true">Lưu</button>
+                  </kendo-dialog-actions>
+                </kendo-dialog>
+              </div>
+
+
+
+            </div>
+            <div class="job-info" fxFlex>
+              <span class="k-icon k-i-dollar"></span> {{ data.FromSalary }} - {{ data.ToSalary }}
+            </div>
+            <div class="job-location" fxFlex>
+              <span class="k-icon k-i-marker-pin-target"></span>{{ data.BaseLocation.Name }}
+            </div>
+          </div>
+          <div fxLayout="column" class="job-box-2" fxFlex="100">
+            <div class="job-content">
+              <span [innerHtml]="data.AdvertisementTemplate"></span>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="25" class="col-right">
+          <div fxLayout="column" class="job-box-right">
+            <div fxFlex style="flex: 1 1 1e-09px; box-sizing: border-box;">
+              <img class="job-icon" src="{{url}}{{data.Company?.FeaturedImageUrl}}"
+                *ngIf="data.Company.FeaturedImageUrl">
+              <img class="job-icon" src="{{default_logo}}" *ngIf="!data.Company?.FeaturedImageUrl">
+            </div>
+            <div class="job-name" fxFlex>
+              {{ data.Company.Name }}
+            </div>
+            <div class="job-phones" fxFlex>
+              <span class="k-icon k-i-flip-vertical"></span>
+              <span class="padding-10"> {{ data.Company.Phone.Value }}</span>
+            </div>
+            <div class="job-infor" fxFlex>
+              <span class="k-icon k-i-marker-pin"></span>
+              <span class="padding-10"> {{ data.Company.Address.Name }}</span>
+            </div>
+            <div class="job-website" fxFlex>
+              <span class="k-icon k-i-toggle-full-screen-mode"></span>
+              <a class="padding-10" (click)="openwebsite(data.Company.Website)"> {{ data.Company.Website }}</a>
+            </div>
+            <div class="job-email" fxFlex>
+              <span class="k-icon k-i-email-box"></span>
+              <a class="padding-10" href="mailto:{{data.Company.Email}}">
+                {{ data.Company.Email }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,369 @@
+<div id="apply-cv" class="page-layout simple">
+
+    <!-- HEADER -->
+    <div class="header mat-accent-bg p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
+
+        <div class="hero-text" style="max-height: 60px;">
+            <div class="card-header-wrapper">
+                <h3> Danh mục công việc dành cho ứng viên</h3>
+            </div>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+        <div class="content-card mat-white-bg">
+            <div class="content">
+                <div class="example-wrap">
+                    <form #f="ngForm" autocomplete="off" (ngSubmit)="accept(f)">
+                        <kendo-tabstrip (selectedTabChange)="onTabChanged($event)">
+
+                            <kendo-tabstrip-tab title="Thông tin chung" [selected]="true">
+                                <ng-template kendoTabContent>
+                                    <div class="content-padding first-padding">
+                                        <!-- <mat-form-field class="w-100-p" fxFlex="50">
+                                        <input type="text" name="ten" matInput
+                                            placeholder="Họ và tên"
+                                            [(ngModel)]="data.CandidateName" [formControl]="candidateValidator"
+                                            required />
+                                        <mat-error *ngIf="candidateValidator.invalid">{{ 'NAV.FIRST-AND-NAME-REQUIRED' |
+                                            translate }}</mat-error>
+                                    </mat-form-field> -->
+                                        <kendo-formfield class="form-first-name">
+                                            <kendo-label [for]="firstName" text="Họ và tên"></kendo-label>
+                                            <input formControlName="firstName" kendoTextBox #firstName required
+                                                type="text" name="ten" [(ngModel)]="data.CandidateName"
+                                                [formControl]="candidateValidator" style="width: 100%;" />
+
+                                            <kendo-formerror>Họ tên không được để trống</kendo-formerror>
+                                        </kendo-formfield>
+                                        <!-- <mat-form-field class="w-100-p" fxFlex="50">
+                                        <input type="email" name="email" matInput
+                                            placeholder="{{ 'NAV.EMAIL' | translate }}" [(ngModel)]="data.Email"
+                                            [formControl]="emailValidator" required />
+                                        <mat-error *ngIf="emailValidator.invalid">{{ 'NAV.EMAIL-REQUIRED' | translate
+                                            }}"</mat-error>
+                                    </mat-form-field> -->
+                                        <kendo-formfield class="form-email">
+                                            <kendo-label [for]="email" text="Email"></kendo-label>
+                                            <input formControlName="email" kendoTextBox #email required type="email"
+                                                name="email" [(ngModel)]="data.Email" [formControl]="emailValidator"
+                                                style="width: 100%;" />
+
+                                            <kendo-formerror>Email không được để trống</kendo-formerror>
+                                        </kendo-formfield>
+                                    </div>
+
+                                    <div class="content-padding">
+                                        <!-- <mat-form-field class="w-100-p" fxFlex="50">
+                                        <input type="text" name="address" matInput
+                                            placeholder="{{ 'NAV.ADDRESS' | translate }}" [(ngModel)]="data.Address" />
+                                    </mat-form-field>
+                                    <mat-form-field class="w-100-p" fxFlex="50">
+                                        <input type="text" name="Phone" matInput
+                                            placeholder="{{ 'NAV.PHONE-NUMBER' | translate }}"
+                                            [(ngModel)]="data.Phone" />
+                                    </mat-form-field>-->
+                                        <kendo-formfield class="form-address">
+                                            <kendo-label [for]="address" text="Địa chỉ"></kendo-label>
+                                            <input formControlName="address" kendoTextBox #address
+                                                style="width: 100%;" />
+                                        </kendo-formfield>
+                                        <kendo-formfield class="form-phone-number">
+                                            <kendo-label [for]="phoneNumber" text="Số điện thoại"></kendo-label>
+                                            <input formControlName="phoneNumber" kendoTextBox #phoneNumber
+                                                style="width: 100%;" />
+                                        </kendo-formfield>
+                                    </div>
+
+                                    <div class="content-padding">
+                                        <!-- <mcg-select [items]="model.Nationals" title="{{ 'NAV.NATIONALITY' | translate }}"
+                                        [(value)]="data.National" fxFlex="50">
+                                    </mcg-select>
+                                    <mat-form-field class="w-100-p" fxFlex="50">
+                                        <input type="text" name="Skype" matInput
+                                            placeholder="{{ 'NAV.OTHER-INFORMATION' | translate }}"
+                                            [(ngModel)]="data.Skype" />
+                                    </mat-form-field> -->
+                                        <div class="form-nationality">
+                                            <p>Quốc tịch</p>
+                                            <kendo-combobox [data]="listItems" formControlName="nationality"
+                                                #nationality [allowCustom]="allowCustom" style="width: 100%;">
+                                            </kendo-combobox>
+                                        </div>
+                                        <kendo-formfield class="form-other">
+                                            <kendo-label [for]="other"
+                                                text="Thông tin liên hệ khác (VD: skype, zalo, facebook)"></kendo-label>
+                                            <input formControlName="other" kendoTextBox #other style="width: 100%;" />
+                                        </kendo-formfield>
+                                    </div>
+                                    <div class="content-padding">
+                                        <!-- <mcg-select [items]="model.Genders" title="{{ 'NAV.SEX' | translate }}"
+                                            [(value)]="data.Gender" fxFlex="50">
+                                        </mcg-select>
+                                        <mat-form-field fxFlex="50">
+                                            <input matInput name="date-of-birth" #ngaysinh [matDatepicker]="picker"
+                                                placeholder="{{ 'NAV.DATE-OF-BIRTH' | translate }}"
+                                                [(ngModel)]="data.DateOfBirth" />
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field> -->
+                                        <div fxLayout="row" fxFlex="50" fxLayoutGap="20px" class="form-wrap">
+                                            <div class="form-sex" fxFlex="50">
+                                                <p>Giới tính</p>
+                                                <kendo-combobox [data]="listItems" formControlName="nationality"
+                                                    #nationality [allowCustom]="allowCustom" style="width: 100%;">
+                                                </kendo-combobox>
+                                            </div>
+                                            <!-- <kendo-formfield class="form-date-birth" fxFlex="50">
+                                                <kendo-label [for]="dateBirth" text="Ngày sinh"></kendo-label>
+                                                <input formControlName="dateBirth" kendoTextBox #dateBirth style="width: 100%;"/>
+                                            </kendo-formfield> -->
+                                            <div class="form-date-birth" fxFlex="50">
+                                                <p>Ngày sinh</p>
+                                                <kendo-datepicker formControlName="dateBirth" #dateBirth
+                                                    style="width: 100%;" [(value)]="value"></kendo-datepicker>
+                                            </div>
+                                        </div>
+                                        <!-- <mcg-select [items]="model.MaritalStatus" title="{{ 'NAV.MARRIAGE' | translate }}"
+                                        [(value)]="data.MaritalStatus" fxFlex="50"></mcg-select> -->
+                                        <div class="form-marriage">
+                                            <p>Tình trạng hôn nhân</p>
+                                            <kendo-combobox [data]="listItems" formControlName="marriage" #marriage
+                                                [allowCustom]="allowCustom" style="width: 100%; padding-right: 10px;">
+                                            </kendo-combobox>
+                                        </div>
+                                    </div>
+                                    <div class="content-padding">
+                                        <!-- <mat-form-field class="w-100-p" fxFlex="25">
+                                        <input type="number" name="NumberOfExperienceOnJob" matInput
+                                            placeholder="{{ 'NAV.YEARS-OF-EXPERIENCE-US' | translate }}"
+                                            [(ngModel)]="data.NumberOfExperienceOnJob" />
+                                    </mat-form-field> -->
+                                        <div class="form-experience" fxFlex="25">
+                                            <p>Số năm kinh nghiệm</p>
+                                            <kendo-numerictextbox [style.marginBottom.px]="10"
+                                                formControlName="experience" #experience style="width: 100%;"
+                                                (valueChange)="onChange($event)" (focus)="onFocus()" (blur)="onBlur()">
+                                            </kendo-numerictextbox>
+                                        </div>
+                                        <!-- <mat-form-field class="w-100-p" fxFlex="25">
+                                        <input type="number" name="NumberOfExperienceOnManager" matInput
+                                            placeholder="{{ 'NAV.YEARS-OF-MANAGER' | translate }}"
+                                            [(ngModel)]="data.NumberOfExperienceOnManager" />
+                                    </mat-form-field> -->
+                                        <div class="form-manage" fxFlex="25">
+                                            <p>Số năm quản lý</p>
+                                            <kendo-numerictextbox [style.marginBottom.px]="10" formControlName="manage"
+                                                #manage style="width: 95%;" (valueChange)="onChange($event)"
+                                                (focus)="onFocus()" (blur)="onBlur()">
+                                            </kendo-numerictextbox>
+                                        </div>
+                                        <!-- <mat-form-field class="w-100-p" fxFlex="25">
+                                        <input type="number" name="DesiredSalary" matInput
+                                            placeholder="{{ 'NAV.DESIRED-SALARY' | translate }}"
+                                            [(ngModel)]="data.DesiredSalary" />
+                                    </mat-form-field> -->
+                                        <div class="form-salary" fxFlex="25">
+                                            <p>Mức lương mong muốn</p>
+                                            <kendo-numerictextbox [style.marginBottom.px]="10" formControlName="salary"
+                                                #salary style="width: 100%;" (valueChange)="onChange($event)"
+                                                (focus)="onFocus()" (blur)="onBlur()">
+                                            </kendo-numerictextbox>
+                                        </div>
+
+                                        <!-- <mcg-select [items]="model.Channels"
+                                        title="{{ 'NAV.WHERE-TO-SEE-APPLICATIONS' | translate }}"
+                                        [(value)]="data.Source" fxFlex="25"></mcg-select> -->
+                                        <div class="form-advertise" fxFlex="25">
+                                            <p>Bạn thấy đăng tuyển ở đâu</p>
+                                            <kendo-combobox [data]="listItems" formControlName="advertise" #advertise
+                                                [allowCustom]="allowCustom" style="width: 100%; padding-right: 10px;">
+                                            </kendo-combobox>
+                                        </div>
+
+
+                                    </div>
+                                </ng-template>
+                            </kendo-tabstrip-tab>
+
+
+                            <!-- <mat-tab label="{{ 'NAV.WORK-EXPERIENCE' | translate }}">
+                                <div class="tab-content p-24" fusePerfectScrollbar>
+                                    <history-jobs [entities]="data.WorkExperiences" [nationals]="model.Nationals"
+                                        [levels]="model.Levels" [personnelScales]="model.PersonnelScales"
+                                        [industries]="model.Industries" [form]="f"
+                                        (entitiesChanged)="onHistoriesCallBack($event)"></history-jobs>
+                                </div>
+                            </mat-tab> -->
+                            <kendo-tabstrip-tab title="Kinh nghiệm làm việc">
+                                <ng-template kendoTabContent>
+                                    <div class="content-padding">
+                                        <div class="form-experience" fxFlex="25">
+                                            <kendo-formfield class="form-first-name">
+                                                <kendo-label [for]="workPlace" text="Nơi công tác"></kendo-label>
+                                                <input formControlName="workPlace" kendoTextBox #workPlace required
+                                                    type="text" name="ten" [(ngModel)]="data.CandidateName"
+                                                    [formControl]="candidateValidator" style="width: 100%;" />
+
+                                                <kendo-formerror>Nơi công tác không được để trống</kendo-formerror>
+                                            </kendo-formfield>
+                                        </div>
+
+                                        <div class="form-manage" fxFlex="25">
+                                            <p>Quy mô nhân sự</p>
+                                            <kendo-combobox [data]="listItems" formControlName="personnelSize"
+                                                #personnelSize [allowCustom]="allowCustom" style="width: 100%;">
+                                            </kendo-combobox>
+                                        </div>
+
+                                        <div class="form-salary" fxFlex="25">
+                                            <p>Quốc gia</p>
+                                            <kendo-combobox [data]="listItems" formControlName="nation" #nation
+                                                [allowCustom]="allowCustom" style="width: 100%;">
+                                            </kendo-combobox>
+                                        </div>
+
+
+                                        <div class="form-advertise" fxFlex="25">
+                                            <p>Ngành nghề/Lĩnh vực</p>
+                                            <kendo-combobox [data]="listItems" formControlName="career" #career
+                                                [allowCustom]="allowCustom" style="width: 100%;">
+                                            </kendo-combobox>
+                                        </div>
+                                    </div>
+
+                                    <div class="content-padding">
+                                        <div class="form-experience" fxFlex="25">
+                                            <p>Cấp bậc</p>
+                                            <kendo-combobox [data]="listItems" formControlName="rank" #rank
+                                                [allowCustom]="allowCustom" style="width: 100%;">
+                                            </kendo-combobox>
+                                        </div>
+
+                                        <div class="form-manage" fxFlex="25">
+                                            <kendo-formfield class="form-first-name">
+                                                <kendo-label [for]="jobPosition" text="Vị trí công việc"></kendo-label>
+                                                <input formControlName="jobPosition" kendoTextBox #jobPosition required
+                                                    type="text" name="ten" [(ngModel)]="data.CandidateName"
+                                                    [formControl]="candidateValidator" style="width: 100%;" />
+
+                                                <kendo-formerror>Vị trí công việc không được để trống</kendo-formerror>
+                                            </kendo-formfield>
+                                        </div>
+
+                                        <!-- <div class="form-salary" fxFlex="25">
+                                            <p>Bắt đầu</p>
+                                            <kendo-combobox [data]="listItems" formControlName="nation" #nation
+                                                [allowCustom]="allowCustom" style="width: 100%;">
+                                            </kendo-combobox>
+                                        </div>
+
+
+                                        <div class="form-advertise" fxFlex="25">
+                                            <p>Kết thúc</p>
+                                            <kendo-combobox [data]="listItems" formControlName="career" #career
+                                                [allowCustom]="allowCustom" style="width: 100%;">
+                                            </kendo-combobox>
+                                        </div> -->
+                                        <div fxFlex="50" style="padding-left: 30px; width: 100%;">
+                                            <kendo-daterange>
+                                                <label fxFlex="25" class="start">
+                                                    <p>Bắt đầu</p>
+                                                    <kendo-dateinput kendoDateRangeStartInput [(value)]="range.start">
+                                                    </kendo-dateinput>
+                                                </label>
+                                                <label fxFlex="25" class="end">
+                                                    <p>Kết thúc</p>
+                                                    <kendo-dateinput kendoDateRangeEndInput [(value)]="range.end">
+                                                    </kendo-dateinput>
+                                                </label>
+                                            </kendo-daterange>
+                                        </div>
+                                    </div>
+                                    <div class="content-textarea">
+                                        <kendo-label [for]="comments" text="Mô tả" class="customizing-label">
+                                        </kendo-label>
+                                        <kendo-textarea #comments name="comments" minlength="5" style="width: 100%;">
+                                        </kendo-textarea>
+                                    </div>
+                                </ng-template>
+                            </kendo-tabstrip-tab>
+
+                            <!-- <mat-tab label="{{ 'NAV.DEVELOPMENTS' | translate }}">
+                                <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                                    <mcg-certificates [entities]="data.Certificates"
+                                        [certificateTypes]="model.Certificates" [majors]="model.Majors"
+                                        [classifications]="model.Classifications"
+                                        (entitiesChanged)="onCertificatesCallBack($event)">
+                                    </mcg-certificates>
+                                </div>
+                            </mat-tab> -->
+                            <kendo-tabstrip-tab title="Bằng cấp">
+                                <ng-template kendoTabContent>
+                                    <div class="content-padding">
+                                        <mcg-certificates [entities]="data.Certificates" [certificateTypes]="model.Certificates" [majors]="model.Majors" 
+                                        [classifications]="model.Classifications" (entitiesChanged)="onCertificatesCallBack($event)">
+                                        </mcg-certificates>
+                                    </div>
+                                </ng-template>
+                            </kendo-tabstrip-tab>
+                            <!-- <mat-tab label="{{ 'NAV.LANGUAGE-CERTIFICATE' | translate }}">
+                                <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                                    <mcg-language-procifiencies [entities]="data.LanguageForJobs"
+                                        [languages]="model.Languages" [classifications]="model.Classifications"
+                                        (entitiesChanged)="onLanguagesCallBack($event)">
+                                    </mcg-language-procifiencies>
+                                </div>
+                            </mat-tab> -->
+                            <kendo-tabstrip-tab title="Chứng chỉ ngoại ngữ">
+                                <ng-template kendoTabContent>
+                                </ng-template>
+                            </kendo-tabstrip-tab>
+                            <!-- <mat-tab label="{{ 'NAV.INFORMATICS-CERTIFICATE' | translate }}">
+                                <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                                    <mcg-offices [entities]="data.OfficeForJobs" [offices]="model.Offices"
+                                        [classifications]="model.Classifications"
+                                        (entitiesChanged)="onOfficesCallBack($event)"></mcg-offices>
+                                </div>
+                            </mat-tab> -->
+                            <kendo-tabstrip-tab title="Chứng chỉ tin học">
+                                <ng-template kendoTabContent>
+                                </ng-template>
+                            </kendo-tabstrip-tab>
+                            <!-- <mat-tab label="{{ 'NAV.CONTACT' | translate }}">
+                                <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                                    <mcg-relatives [entities]="data.ContactPersons"
+                                        (entitiesChanged)="onContactPersonsCallBack($event)"></mcg-relatives>
+                                </div>
+                            </mat-tab> -->
+                            <kendo-tabstrip-tab title="Liên hệ">
+                                <ng-template kendoTabContent>
+                                    <app-contacts></app-contacts>
+                                </ng-template>
+                            </kendo-tabstrip-tab>
+                        </kendo-tabstrip>
+                        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end space-around" class="button-padding">
+                            <span class="flex-space"></span>
+                            <button mat-raised-button color="warn" (click)="back()" *ngIf="index > 0">Quay lại</button>
+                            <button mat-raised-button class="next-button" (click)="next1()" *ngIf="index === 0">Tiếp
+                                tục</button>
+                            <button mat-raised-button class="next-button" (click)="next2()" *ngIf="index === 1">Tiếp
+                                tục</button>
+                            <button mat-raised-button class="next-button" (click)="next3()" *ngIf="index === 2">Tiếp
+                                tục</button>
+                            <button mat-raised-button class="next-button" (click)="next4()" *ngIf="index === 3">Tiếp
+                                tục</button>
+                            <button mat-raised-button class="next-button" (click)="next5()" *ngIf="index === 4">Tiếp
+                                tục</button>
+                            <button mat-raised-button color="primary" class="save-button">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

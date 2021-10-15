@@ -1,0 +1,21 @@
+<form #myForm="ngForm" novalidate (ngSubmit)="save(myForm.value, myForm.valid)" class="example-wrapper" style="width: 100%;">
+  <div class="container-fluid" >
+      <div>
+        <label style="display: block; margin: .8em 0 .2em">Nhập họ và tên:</label>
+        <input type="text" name="uName" #uName="ngModel" [(ngModel)]="userName" style="width: 100%;" required minlength="4" class="k-textbox"/>
+        <p style="color: red; font-size: .8em; margin-top: .5em;"
+          [hidden]="uName.valid || (uName.pristine && !myForm.submitted)">
+          Tên người dùng là bắt buộc và phải có tối thiểu 4 ký tự và không để trống.
+        </p>
+        <label style="display: block; margin: .8em 0 .2em;">File CV:</label>
+        <kendo-upload required name="myUpload" #myUpload="ngModel" [saveUrl]="uploadSaveUrl" style="width: 100%;"
+          [removeUrl]="uploadRemoveUrl" [restrictions]="myRestrictions" [(ngModel)]="userImages">
+        </kendo-upload>
+        <!-- <p style="color: red; font-size: .8em; margin-top: .5em;"
+          [hidden]="myUpload.valid || (myUpload.pristine && !myForm.submitted)">
+          Tải lên hình đại diện là bắt buộc.
+        </p> -->
+        <!-- <button type="submit" class="k-button k-primary" style="margin: 1em 0;">Submit</button> -->
+      </div>
+    </div>
+</form>
